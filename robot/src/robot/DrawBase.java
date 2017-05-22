@@ -3,10 +3,10 @@ import java.applet.Applet;
 import java.awt.event.*;  // 마우스 이벤트관련 라이브러리
 
 
-public class DrawBase extends Applet implements Runnable, KeyListener{
+public class DrawBase extends Applet implements Runnable, KeyListener{a
 
 
-
+asasd
     public void init(){
 
 

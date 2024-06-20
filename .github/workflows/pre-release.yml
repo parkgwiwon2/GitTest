@@ -1,0 +1,14 @@
+name: deploy
+
+on:
+  release:
+    types:
+      - prereleased
+
+jobs:
+  pre-release:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+      run: |
+        echo pre-release

@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
-      run: |
+    - run: |
         echo pre-released ${{ github.event.release.tag_name }}

@@ -1,14 +1,14 @@
-name: published
+name: released
 
 on:
   release:
     types:
-      - published
+      - released
 
 jobs:
   pre-release:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
-      run: |
-        echo published
+    - run: |
+        echo released ${{ github.event.release.tag_name }}

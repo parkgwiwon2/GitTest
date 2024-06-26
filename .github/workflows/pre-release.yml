@@ -1,10 +1,9 @@
 name: pre
 
 on:
-  release:
-    types:
-      - prereleased
-    tags: "v*"
+  push:
+    tags:
+     - v*
 
 jobs:
   pre-release:
@@ -13,3 +12,4 @@ jobs:
     - uses: actions/checkout@v4
     - run: |
         echo pre-released ${{ github.event.release.tag_name }}
+         echo pre-released ${{ github.event.release.action }}

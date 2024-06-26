@@ -4,6 +4,7 @@ on:
   release:
     types:
       - prereleased
+    tag: "v*"
 
 jobs:
   pre-release:

@@ -1,0 +1,28 @@
+name: test
+
+on: push
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  setup-tags:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    outputs:
+      tags: ${{ steps.tag-test.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: tag-test
+        uses: ./.github/actions/tag-test
+
+  read-tag:
+    runs-on: ubuntu-22.04
+    needs: [ setup-tags ]
+    env:
+      tag: ${{ fromJson(needs.setup-tags.outputs.tags) }}
+    steps:
+      - run: |
+          echo "${{ env.tag.tag_name }}"
+          echo "${{ env.tag.image_name }}"

@@ -1,0 +1,16 @@
+name: "setup-application-tags"
+description: "Setup tags for the application."
+outputs:
+  tags:
+    description: "The tags of the images."
+    value: ${{ steps.setup.outputs.tags }}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - name: "Setup Build and Push."
+      shell: bash
+      id: setup
+      working-directory: docker
+      run: |
+        echo "tags=[{\"image_name\":\"authlete\",\"tag_name\":\"a1\"},{\"image_name\":\"authlete-so-console\",\"tag_name\":\"a2\"},{\"image_name\":\"authlete-cd-console\",\"tag_name\":\"a3\"}]" >> $GITHUB_OUTPUT

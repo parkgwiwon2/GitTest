@@ -8,7 +8,6 @@ on:
 jobs:
   approve1:
     if: startsWith(github.event.release.action, 'prereleased')
-    needs: test
     runs-on: ubuntu-latest
     environment: Approve1
     steps:
@@ -18,7 +17,6 @@ jobs:
 
   approve2:
     if: startsWith(github.event.release.action, 'prereleased')
-    needs: test
     runs-on: ubuntu-latest
     environment: Approve2
     steps:
@@ -40,7 +38,6 @@ jobs:
 
   approve3:
     if: startsWith(github.event.release.action, 'released')
-    needs: test
     runs-on: ubuntu-latest
     environment: Approve1
     steps:
@@ -50,7 +47,6 @@ jobs:
 
   approve4:
     if: startsWith(github.event.release.action, 'released')
-    needs: test
     runs-on: ubuntu-latest
     environment: Approve2
     steps:

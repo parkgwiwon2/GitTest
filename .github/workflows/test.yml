@@ -3,15 +3,96 @@ name: test
 on: push
 
 jobs:
-  test1:
+  setup-tags:
     if: true
     runs-on: ubuntu-latest
     steps:
       - run: echo test1
 
-  test2:
+  application-build-push:
+    if: true
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+
+  application-deployment-approve1:
+    runs-on: ubuntu-latest
+    environment: application-deployment-approve1
+    needs: [ application-build-push ]
+    steps:
+      - name: Approve 1
+        run: |
+          echo "Approved 1"
+
+  application-deployment-approve2:
+    runs-on: ubuntu-latest
+    environment: application-deployment-approve2
+    needs: [ application-build-push ]
+    steps:
+      - name: Approve 2
+        run: |
+          echo "Approved 2"
+
+  application-deploy-prod:
+    if: true
+    runs-on: ubuntu-latest
+    needs: [ setup-tags, application-deployment-approve1, application-deployment-approve2 ]
+    steps:
+      - run: echo test1
+
+  infra-test:
     if: false
     runs-on: ubuntu-latest
     steps:
       - run: echo test1
+  infra-approval-1:
+    if: false
+    needs: infra-test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+  infra-approval-2:
+    if: false
+    needs: infra-test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+
+  terraform-prod-infra:
+    if: true
+    runs-on: ubuntu-latest
+    needs:
+      - infra-approval-1
+      - infra-approval-2
+    steps:
+      - run: echo test1
+
+
+  setting-plan-prod:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+  authlete-setting-deployment-approve1:
+    if: false
+    needs: setting-plan-prod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+  authlete-setting-deployment-approve2:
+    if: false
+    needs: setting-plan-prod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+
+  setting-apply-prod:
+    if: true
+    runs-on: ubuntu-latest
+    needs:
+      - infra-approval-1
+      - infra-approval-2
+    steps:
+      - run: echo test1
+
 

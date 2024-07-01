@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: echo ${{ github.event.release.action }}
   approve1:
-    if: startsWith(github.event.release.action, 'prereleased')
+    if: ${{ (github.event.release.action == 'released') }}
     runs-on: ubuntu-latest
     environment: Approve1
     steps:

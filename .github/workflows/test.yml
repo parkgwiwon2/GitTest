@@ -1,0 +1,17 @@
+name: test
+
+on: push
+
+jobs:
+  test1:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+
+  test2:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo test1
+

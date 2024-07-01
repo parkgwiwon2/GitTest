@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test1:
-    if: false
+    if: true
     runs-on: ubuntu-latest
     steps:
       - run: echo test1

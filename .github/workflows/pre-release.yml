@@ -6,6 +6,10 @@ on:
       - v*
 
 jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.release.action }}
   approve1:
     if: startsWith(github.event.release.action, 'prereleased')
     runs-on: ubuntu-latest

@@ -3,13 +3,69 @@ name: pre
 on:
   push:
     tags:
-     - v*
+      - v*
 
 jobs:
+  approve1:
+    if: startsWith(github.event.release.action, 'prereleased')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: Approve1
+    steps:
+      - name: Approve 1
+        run: |
+          echo "Approved 1"
+
+  approve2:
+    if: startsWith(github.event.release.action, 'prereleased')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: Approve2
+    steps:
+      - name: Approve 2
+        run: |
+          echo "Approved 2"    
+
   pre-release:
+    if: startsWith(github.event.release.action, 'prereleased')
+    needs:
+      - approve1
+      - approve2
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - run: |
-        echo pre-released ${{ github.event.release.tag_name }}
-         echo pre-released ${{ github.event.release.action }}
+      - uses: actions/checkout@v4
+      - run: |
+          echo pre-released ${{ github.event.release.tag_name }}
+           echo pre-released ${{ github.event.release.action }}
+
+  approve3:
+    if: startsWith(github.event.release.action, 'released')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: Approve1
+    steps:
+      - name: Approve 1
+        run: |
+          echo "Approved 1"
+
+  approve4:
+    if: startsWith(github.event.release.action, 'released')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: Approve2
+    steps:
+      - name: Approve 2
+        run: |
+          echo "Approved 2"    
+
+  released:
+    if: startsWith(github.event.release.action, 'released')
+    needs:
+      - approve3
+      - approve4
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo pre-released ${{ github.event.release.tag_name }}
+           echo pre-released ${{ github.event.release.action }}        

@@ -6,21 +6,11 @@ on:
       - released
 
 jobs:
-  application-deployment-approve:
-    runs-on: ubuntu-22.04
-    strategy:
-      fail-fast: false
-      matrix:
-        number: [1, 2]
-    steps:
-      - name: Approve ${{ matrix.number }}
-        run: |
-          echo "Approved ${{ matrix.number }}"
-
-  pre-release:
+  release:
     runs-on: ubuntu-22.04
     needs: [application-deployment-approve]
     steps:
       - uses: actions/checkout@v4
       - run: |
           echo released ${{ github.event.release.tag_name }}
+          gh release edit ${{ github.event.release.tag_name }} --latest

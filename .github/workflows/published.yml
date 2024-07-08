@@ -8,7 +8,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-22.04
-    needs: [application-deployment-approve]
     steps:
       - uses: actions/checkout@v4
       - run: |

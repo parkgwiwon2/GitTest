@@ -5,6 +5,10 @@ on:
     types:
       - released
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   release:
     runs-on: ubuntu-22.04
